@@ -1,3 +1,52 @@
 {
-  "hello-world": "Merhaba dünya!"
+  "settings": {
+    "title": "Çerez Ayarları",
+    "enabled": "Çerez Onayını Etkinleştir",
+    "enabled-desc": "Ziyaretçilere çerez onay başlığını göster.",
+    "message": "Mesaj",
+    "message-desc": "Başlıkta gösterilecek metin.",
+    "button-text": "Buton Metni",
+    "button-text-desc": "'Kabul Et' butonu için metin.",
+    "link-text": "Bağlantı Metni",
+    "link-text-desc": "Gizlilik politikası bağlantısı için metin.",
+    "link-url": "Bağlantı URL",
+    "link-url-desc": "Gizlilik politikası için URL.",
+    "design": "Tasarım",
+    "design-bar": "Çubuk",
+    "design-floating": "Yüzen",
+    "design-modal": "Modal",
+    "position": "Konum",
+    "position-top": "Üst",
+    "position-bottom": "Alt",
+    "position-top-left": "Sol Üst",
+    "position-top-right": "Sağ Üst",
+    "position-bottom-left": "Sol Alt",
+    "position-bottom-right": "Sağ Alt",
+    "colors": {
+      "title": "Renkler",
+      "primary": "Birincil Renk",
+      "text": "Metin Rengi",
+      "background": "Arka Plan Rengi"
+    },
+    "use-custom-content": "Özel İçerik Kullan",
+    "use-custom-content-desc": "Çerez başlığı için kendi HTML'inizi oluşturmak için bu seçeneği etkinleştirin.",
+    "custom-content": "Özel HTML İçeriği",
+    "custom-content-desc": "Çerez başlığınız için HTML yapısını sağlayın. Kullanıcıların kabul edebileceği bir yöntem eklediğinizden emin olun."
+  },
+  "permissions": {
+    "MANAGE_COOKIES": {
+      "title": "Çerezleri Yönet",
+      "description": "Çerez onayı ayarlarını değiştirebilir."
+    }
+  },
+  "activity-logs": {
+    "UPDATED_COOKIES_CONFIG": "<b>{username}</b> çerez yapılandırmasını güncelledi."
+  },
+  "generic": {
+    "save": "Kaydet"
+  },
+  "toasts": {
+    "save-success": "Ayarlar başarıyla kaydedildi.",
+    "save-error": "Ayarlar kaydedilirken bir hata oluştu."
+  }
 }

@@ -1,3 +1,52 @@
 {
-  "hello-world": "Hello world!"
+  "settings": {
+    "title": "Cookies Settings",
+    "enabled": "Enable Cookie Consent",
+    "enabled-desc": "Show the cookie consent banner to visitors.",
+    "message": "Message",
+    "message-desc": "The text to show in the banner.",
+    "button-text": "Button Text",
+    "button-text-desc": "Text for the 'Accept' button.",
+    "link-text": "Link Text",
+    "link-text-desc": "Text for the privacy policy link.",
+    "link-url": "Link URL",
+    "link-url-desc": "URL for the privacy policy.",
+    "design": "Design",
+    "design-bar": "Bar",
+    "design-floating": "Floating",
+    "design-modal": "Modal",
+    "position": "Position",
+    "position-top": "Top",
+    "position-bottom": "Bottom",
+    "position-top-left": "Top Left",
+    "position-top-right": "Top Right",
+    "position-bottom-left": "Bottom Left",
+    "position-bottom-right": "Bottom Right",
+    "colors": {
+      "title": "Colors",
+      "primary": "Primary Color",
+      "text": "Text Color",
+      "background": "Background Color"
+    },
+    "use-custom-content": "Use Custom Content",
+    "use-custom-content-desc": "Enable this to provide your own HTML for the cookie banner.",
+    "custom-content": "Custom HTML Content",
+    "custom-content-desc": "Provide the HTML structure for your cookie banner. Make sure to include a way for users to accept."
+  },
+  "permissions": {
+    "MANAGE_COOKIES": {
+      "title": "Manage Cookies",
+      "description": "Can change cookie consent settings."
+    }
+  },
+  "activity-logs": {
+    "UPDATED_COOKIES_CONFIG": "<b>{username}</b> updated the cookies configuration."
+  },
+  "generic": {
+    "save": "Save"
+  },
+  "toasts": {
+    "save-success": "Settings saved successfully.",
+    "save-error": "Failed to save settings."
+  }
 }

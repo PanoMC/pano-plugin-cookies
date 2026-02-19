@@ -1,0 +1,52 @@
+{
+    "settings": {
+        "title": "Настройки куки",
+        "enabled": "Включить согласие на куки",
+        "enabled-desc": "Показывать баннер согласия на куки посетителям.",
+        "message": "Сообщение",
+        "message-desc": "Текст для отображения в баннере.",
+        "button-text": "Текст кнопки",
+        "button-text-desc": "Текст для кнопки 'Принять'.",
+        "link-text": "Текст ссылки",
+        "link-text-desc": "Текст для ссылки на политику конфиденциальности.",
+        "link-url": "URL ссылки",
+        "link-url-desc": "URL для политики конфиденциальности.",
+        "design": "Дизайн",
+        "design-bar": "Панель",
+        "design-floating": "Плавающий",
+        "design-modal": "Модальное окно",
+        "position": "Позиция",
+        "position-top": "Сверху",
+        "position-bottom": "Снизу",
+        "position-top-left": "Сверху слева",
+        "position-top-right": "Сверху справа",
+        "position-bottom-left": "Снизу слева",
+        "position-bottom-right": "Снизу справа",
+        "colors": {
+            "title": "Цвета",
+            "primary": "Основной цвет",
+            "text": "Цвет текста",
+            "background": "Цвет фона"
+        },
+        "use-custom-content": "Использовать пользовательский контент",
+        "use-custom-content-desc": "Включите это, чтобы предоставить свой собственный HTML для баннера куки.",
+        "custom-content": "Пользовательский HTML контент",
+        "custom-content-desc": "Предоставьте структуру HTML для вашего баннера куки. Не забудьте включить способ принятия пользователем."
+    },
+    "permissions": {
+        "MANAGE_COOKIES": {
+            "title": "Управление куки",
+            "description": "Может изменять настройки согласия на куки."
+        }
+    },
+    "activity-logs": {
+        "UPDATED_COOKIES_CONFIG": "<b>{username}</b> обновил конфигурацию куки."
+    },
+    "generic": {
+        "save": "Сохранить"
+    },
+    "toasts": {
+        "save-success": "Настройки успешно сохранены.",
+        "save-error": "Не удалось сохранить настройки."
+    }
+}
