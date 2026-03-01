@@ -14,7 +14,7 @@ import io.vertx.json.schema.SchemaRepository
 @Endpoint
 class GetCookiesConfigAPI(
     private val plugin: CookiesPlugin,
-) : LoggedInApi() {
+) : Api() {
     override val paths = listOf(Path("/api/cookies/config", RouteType.GET))
 
     private val configManager by lazy {
