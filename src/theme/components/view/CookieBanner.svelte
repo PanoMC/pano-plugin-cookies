@@ -1,154 +1,122 @@
-<style>
-  .cookie-banner-bar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 1050;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    border-top: 3px solid transparent;
-    transition: all 0.3s ease;
-  }
-  .cookie-banner-bar.top {
-    top: 0;
-    border-top: none;
-    border-bottom: 3px solid var(--primary);
-  }
-  .cookie-banner-bar.bottom {
-    bottom: 0;
-  }
-
-  .cookie-banner-floating,
-  .cookie-banner-modal {
-    position: fixed;
-    z-index: 1050;
-    width: 350px;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-  }
-
-  .cookie-banner-floating.bottom-left {
-    bottom: 20px;
-    left: 20px;
-  }
-  .cookie-banner-floating.bottom-right {
-    bottom: 20px;
-    right: 20px;
-  }
-  .cookie-banner-floating.top-left {
-    top: 20px;
-    left: 20px;
-  }
-  .cookie-banner-floating.top-right {
-    top: 20px;
-    right: 20px;
-  }
-  .cookie-banner-floating.top {
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .cookie-banner-floating.bottom {
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .cookie-banner-modal {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-  }
-
-  @media (max-width: 576px) {
-    .cookie-banner-floating,
-    .cookie-banner-modal {
-      width: 90%;
-      left: 5%;
-      right: 5%;
-      transform: none;
-    }
-  }
-
-  .cookie-banner-custom {
-    position: fixed;
-    z-index: 1050;
-    transition: all 0.3s ease;
-  }
-
-  .message {
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-</style>
-
 {#if show && config?.enabled}
   {#if config.design === 'BAR'}
     <div
-      class="cookie-banner-bar {config.position.toLowerCase()}"
-      style="background: {config.backgroundColor}; color: {config.textColor}; border-color: {config.primaryColor}">
+      class="fixed-{config.position.toLowerCase()} start-0 end-0 border-top border-bottom shadow-sm p-3"
+      style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
+        '#212529'}; border-color: {config.primaryColor} !important; z-index: 9999;">
       {#if config.useCustomContent}
         {@html config.customContent}
       {:else}
-        <div
-          class="container d-flex flex-column flex-md-row align-items-center justify-content-between py-2">
-          <div class="message mb-2 mb-md-0">
-            {config.message}
-            {#if config.linkText && config.linkUrl}
-              <a
-                href={config.linkUrl}
-                target="_blank"
-                style="color: {config.primaryColor}"
-                class="ms-1">
-                {config.linkText}
-              </a>
-            {/if}
+        <div class="container text-center text-md-start">
+          <div class="row align-items-center">
+            <div class="col-md-9 mb-3 mb-md-0">
+              <p class="mb-0">
+                {config.message}
+                {#if config.linkText && config.linkUrl}
+                  <a
+                    href={config.linkUrl}
+                    target="_blank"
+                    style="color: {config.primaryColor}; text-decoration: underline;"
+                    class="ms-1">
+                    {config.linkText}
+                  </a>
+                {/if}
+              </p>
+            </div>
+            <div class="col-md-3 text-md-end">
+              {#if config.buttonText}
+                <button
+                  class="btn btn-primary px-4"
+                  style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
+                  onclick={accept}>
+                  {config.buttonText}
+                </button>
+              {/if}
+            </div>
           </div>
-          {#if config.buttonText}
-            <button
-              class="btn"
-              style="background: {config.primaryColor}; color: #fff"
-              on:click={accept}>
-              {config.buttonText}
-            </button>
-          {/if}
         </div>
       {/if}
     </div>
-  {:else}
+  {:else if config.design === 'FLOATING'}
     <div
-      class="cookie-banner-{config.design.toLowerCase()} {config.position
-        .toLowerCase()
-        .replace('_', '-')}"
-      style="background: {config.backgroundColor}; color: {config.textColor}; --primary: {config.primaryColor}">
-      {#if config.useCustomContent}
-        {@html config.customContent}
-      {:else}
-        <div class="content">
-          <div class="message mb-3">
-            {config.message}
-            {#if config.linkText && config.linkUrl}
-              <div class="mt-2">
-                <a href={config.linkUrl} target="_blank" style="color: {config.primaryColor}">
+      class="fixed-{config.position.toLowerCase().replace('_', '-')} p-4"
+      style="z-index: 9999; max-width: 400px;">
+      <div
+        class="card shadow-lg border-0"
+        style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
+          '#212529'};">
+        <div class="card-body p-4">
+          {#if config.useCustomContent}
+            {@html config.customContent}
+          {:else}
+            <p class="card-text mb-4">
+              {config.message}
+              {#if config.linkText && config.linkUrl}
+                <a
+                  href={config.linkUrl}
+                  target="_blank"
+                  style="color: {config.primaryColor}; text-decoration: underline;"
+                  class="d-block mt-2">
                   {config.linkText}
                 </a>
-              </div>
-            {/if}
-          </div>
-          {#if config.buttonText}
-            <div class="actions text-end">
+              {/if}
+            </p>
+            {#if config.buttonText}
               <button
-                class="btn w-100"
-                style="background: {config.primaryColor}; color: #fff"
-                on:click={accept}>
+                class="btn btn-primary w-100 py-2"
+                style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
+                onclick={accept}>
                 {config.buttonText}
               </button>
-            </div>
+            {/if}
           {/if}
         </div>
-      {/if}
+      </div>
+    </div>
+  {:else if config.design === 'MODAL'}
+    <div
+      class="vw-100 vh-100 position-fixed top-0 start-0 d-flex align-items-center justify-content-center p-3"
+      style="background: rgba(0,0,0,0.5); z-index: 9999;">
+      <div style="width: 100%; max-width: 450px;">
+        <div
+          class="card shadow-lg border-0"
+          style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
+            '#212529'};">
+          <div class="card-body p-4 text-center">
+            {#if config.useCustomContent}
+              {@html config.customContent}
+            {:else}
+              <h5 class="card-title mb-3">Çerez Politikası</h5>
+              <p class="card-text mb-4">
+                {config.message}
+                {#if config.linkText && config.linkUrl}
+                  <a
+                    href={config.linkUrl}
+                    target="_blank"
+                    style="color: {config.primaryColor}; text-decoration: underline;"
+                    class="d-block mt-2">
+                    {config.linkText}
+                  </a>
+                {/if}
+              </p>
+              {#if config.buttonText}
+                <button
+                  class="btn btn-primary w-100 py-2"
+                  style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
+                  onclick={accept}>
+                  {config.buttonText}
+                </button>
+              {/if}
+            {/if}
+          </div>
+        </div>
+      </div>
+    </div>
+  {:else}
+    <div
+      class="position-fixed p-3 shadow"
+      style="background: {config.backgroundColor}; color: {config.textColor}; z-index: 9999; bottom: 1rem; right: 1rem;">
+      {@html config.customContent}
     </div>
   {/if}
 {/if}

@@ -29,7 +29,7 @@
       <div class="row mb-3">
         <label class="col-md-6 col-form-label" for="useCustomContent">
           {$_('settings.use-custom-content')}
-          <small class="text-secondary d-block">{$_('settings.use-custom-content-desc')}</small>
+          <small class=" d-block">{$_('settings.use-custom-content-desc')}</small>
         </label>
         <div class="col-md-6 d-flex align-items-center">
           <div class="form-check form-switch">
@@ -43,10 +43,10 @@
       </div>
 
       {#if config.useCustomContent}
-        <div class="mb-3 animate__animated animate__fadeIn">
+        <div class="mb-3">
           <label class="form-label" for="customContent">
             {$_('settings.custom-content')}
-            <small class="text-secondary d-block">{$_('settings.custom-content-desc')}</small>
+            <small class=" d-block">{$_('settings.custom-content-desc')}</small>
           </label>
           <Editor
             bind:content={config.customContent}
@@ -56,17 +56,14 @@
         </div>
       {:else}
         <!-- Message -->
-        <div class="row mb-3 animate__animated animate__fadeIn">
+        <div class="row mb-3">
           <label class="col-md-6 col-form-label" for="message">
             {$_('settings.message')}
-            <small class="text-secondary d-block">{$_('settings.message-desc')}</small>
+            <small class=" d-block">{$_('settings.message-desc')}</small>
           </label>
           <div class="col-md-6">
-            <textarea
-              class="form-control"
-              id="message"
-              rows="2"
-              bind:value={config.message}></textarea>
+            <textarea class="form-control" id="message" rows="2" bind:value={config.message}
+            ></textarea>
           </div>
         </div>
 
@@ -74,7 +71,7 @@
         <div class="row mb-3">
           <label class="col-md-6 col-form-label" for="buttonText">
             {$_('settings.button-text')}
-            <small class="text-secondary d-block">{$_('settings.button-text-desc')}</small>
+            <small class=" d-block">{$_('settings.button-text-desc')}</small>
           </label>
           <div class="col-md-6">
             <input
@@ -89,14 +86,10 @@
         <div class="row mb-3">
           <label class="col-md-6 col-form-label" for="linkText">
             {$_('settings.link-text')}
-            <small class="text-secondary d-block">{$_('settings.link-text-desc')}</small>
+            <small class=" d-block">{$_('settings.link-text-desc')}</small>
           </label>
           <div class="col-md-6">
-            <input
-              class="form-control"
-              id="linkText"
-              type="text"
-              bind:value={config.linkText} />
+            <input class="form-control" id="linkText" type="text" bind:value={config.linkText} />
           </div>
         </div>
 
@@ -104,14 +97,10 @@
         <div class="row mb-3">
           <label class="col-md-6 col-form-label" for="linkUrl">
             {$_('settings.link-url')}
-            <small class="text-secondary d-block">{$_('settings.link-url-desc')}</small>
+            <small class=" d-block">{$_('settings.link-url-desc')}</small>
           </label>
           <div class="col-md-6">
-            <input
-              class="form-control"
-              id="linkUrl"
-              type="text"
-              bind:value={config.linkUrl} />
+            <input class="form-control" id="linkUrl" type="text" bind:value={config.linkUrl} />
           </div>
         </div>
       {/if}
