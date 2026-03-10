@@ -28,7 +28,7 @@
                 <button
                   class="btn btn-primary px-4"
                   style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
-                  onclick={accept}>
+                  use:clickHandler>
                   {config.buttonText}
                 </button>
               {/if}
@@ -65,7 +65,7 @@
               <button
                 class="btn btn-primary w-100 py-2"
                 style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
-                onclick={accept}>
+                use:clickHandler>
                 {config.buttonText}
               </button>
             {/if}
@@ -103,7 +103,7 @@
                 <button
                   class="btn btn-primary w-100 py-2"
                   style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
-                  onclick={accept}>
+                  use:clickHandler>
                   {config.buttonText}
                 </button>
               {/if}
@@ -122,7 +122,7 @@
 {/if}
 
 <script>
-  import { page } from '@panomc/sdk/svelte';
+  import {page} from '@panomc/sdk/svelte';
 
   const browser = typeof window !== 'undefined';
   const accepted = browser ? localStorage.getItem('pano-cookies-accepted') : true;
@@ -135,5 +135,14 @@
       localStorage.setItem('pano-cookies-accepted', 'true');
     }
     show = false;
+  }
+
+  function clickHandler(node) {
+    node.addEventListener('click', accept);
+    return {
+      destroy() {
+        node.removeEventListener('click', accept);
+      }
+    };
   }
 </script>
