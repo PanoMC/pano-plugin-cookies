@@ -39,8 +39,8 @@
     </div>
   {:else if config.design === 'FLOATING'}
     <div
-      class="fixed-{config.position.toLowerCase().replace('_', '-')} p-4"
-      style="z-index: 9999; max-width: 400px;">
+      class="p-4"
+      style="position: fixed; {floatingOffset(config.position)} z-index: 9999; max-width: 400px;">
       <div
         class="card shadow-lg border-0"
         style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
@@ -135,6 +135,24 @@
       localStorage.setItem('pano-cookies-accepted', 'true');
     }
     show = false;
+  }
+
+  function floatingOffset(position) {
+    switch (position) {
+      case 'TOP':
+        return 'top: 0; left: 50%; transform: translateX(-50%);';
+      case 'TOP_LEFT':
+        return 'top: 0; left: 0;';
+      case 'TOP_RIGHT':
+        return 'top: 0; right: 0;';
+      case 'BOTTOM_LEFT':
+        return 'bottom: 0; left: 0;';
+      case 'BOTTOM_RIGHT':
+        return 'bottom: 0; right: 0;';
+      case 'BOTTOM':
+      default:
+        return 'bottom: 0; left: 50%; transform: translateX(-50%);';
+    }
   }
 
   function clickHandler(node) {
