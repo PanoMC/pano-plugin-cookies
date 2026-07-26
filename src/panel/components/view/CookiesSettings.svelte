@@ -200,8 +200,7 @@
 
 <script>
   import { onMount } from 'svelte';
-  import { _ } from '../../../main';
-  import { showToast } from '@panomc/sdk/toasts';
+  import { _, showSuccessToast, showErrorToast } from '../../../main';
   import { Editor } from '@panomc/sdk/components/panel';
   import ApiUtil from '@panomc/sdk/utils/api';
 
@@ -239,10 +238,10 @@
       });
       addon.config = config;
       initialConfig = JSON.parse(JSON.stringify(config));
-      await showToast(`plugins.${addon.id}.toasts.save-success`);
+      await showSuccessToast(`plugins.${addon.id}.toasts.save-success`);
     } catch (e) {
       console.error('Failed to save cookies config', e);
-      await showToast(`plugins.${addon.id}.toasts.save-error`);
+      await showErrorToast(`plugins.${addon.id}.toasts.save-error`);
     } finally {
       saving = false;
     }
