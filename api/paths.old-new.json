@@ -1,0 +1,26 @@
+[
+  {
+    "method": "GET",
+    "old": "/api/cookies/config",
+    "new": "/api/plugins/pano-plugin-cookies/config",
+    "relative": "/plugins/pano-plugin-cookies/config",
+    "class": "GetCookiesConfigAPI",
+    "file": "src/main/kotlin/com/panomc/plugins/cookies/routes/GetCookiesConfigAPI.kt"
+  },
+  {
+    "method": "GET",
+    "old": "/api/panel/cookies/config",
+    "new": "/api/plugins/pano-plugin-cookies/panel/config",
+    "relative": "/plugins/pano-plugin-cookies/panel/config",
+    "class": "PanelGetCookiesConfigAPI",
+    "file": "src/main/kotlin/com/panomc/plugins/cookies/routes/panel/PanelGetCookiesConfigAPI.kt"
+  },
+  {
+    "method": "PUT",
+    "old": "/api/panel/cookies/config",
+    "new": "/api/plugins/pano-plugin-cookies/panel/config",
+    "relative": "/plugins/pano-plugin-cookies/panel/config",
+    "class": "PanelUpdateCookiesConfigAPI",
+    "file": "src/main/kotlin/com/panomc/plugins/cookies/routes/panel/PanelUpdateCookiesConfigAPI.kt"
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "controllers": {},
+  "format": 1,
+  "views": {
+    "cookies:CookieBanner": {
+      "classes": [
+        "cookies-cookie-banner",
+        "cookies-cookie-banner__action",
+        "cookies-cookie-banner__action-2",
+        "cookies-cookie-banner__action-3",
+        "cookies-cookie-banner__body",
+        "cookies-cookie-banner__body-2",
+        "cookies-cookie-banner__title"
+      ],
+      "contract": 1,
+      "hooks": [],
+      "props": {
+        "config": {
+          "required": false
+        }
+      },
+      "slots": []
+    }
+  }
+}

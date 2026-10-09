@@ -1,7 +1,7 @@
 import { PanoPlugin, viewComponent } from '@panomc/sdk';
 import { derived } from 'svelte/store';
 import { _ as i18n } from '@panomc/sdk/utils/language';
-import ApiUtil from '@panomc/sdk/utils/api';
+import { api } from '@panomc/sdk/plugin-api';
 import { showToast } from '@panomc/sdk/toasts';
 
 const pluginId = 'pano-plugin-cookies';
@@ -37,8 +37,8 @@ export default class CookiesPlugin extends PanoPlugin {
         if (data.addon.id !== pluginId) return;
 
         try {
-          const config = await ApiUtil.get({
-            path: '/api/panel/cookies/config',
+          const config = await api.panel.get({
+            path: '/config',
             request: event,
           });
           data.addon.config = config;
@@ -55,12 +55,10 @@ export default class CookiesPlugin extends PanoPlugin {
       });
     } else {
       // Theme side
-      const cookieBannerComponent = viewComponent(() => import('./theme/components/view/CookieBanner.svelte'));
-
       pano.ui.app.onLoad(async (data, event) => {
         try {
-          const config = await ApiUtil.get({
-            path: '/api/cookies/config',
+          const config = await api.get({
+            path: '/config',
             request: event,
           });
           data.cookiesConfig = config;
@@ -68,12 +66,7 @@ export default class CookiesPlugin extends PanoPlugin {
           console.error('[pano-plugin-cookies] Failed to load config', e);
         }
       });
-
-      pano.ui.hook.register({
-        name: 'theme:top',
-        component: cookieBannerComponent,
-        skipLoad: true,
-      });
+      // The banner mounts on `theme:top` through `export const view` in CookieBanner.svelte.
     }
   }
 

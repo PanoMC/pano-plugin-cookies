@@ -202,7 +202,7 @@
   import { onMount } from 'svelte';
   import { _, showSuccessToast, showErrorToast } from '../../../main';
   import { Editor } from '@panomc/sdk/components/panel';
-  import ApiUtil from '@panomc/sdk/utils/api';
+  import { api } from '@panomc/sdk/plugin-api';
 
   export let addon;
 
@@ -232,8 +232,8 @@
     if (saving) return;
     saving = true;
     try {
-      await ApiUtil.put({
-        path: '/api/panel/cookies/config',
+      await api.panel.put({
+        path: '/config',
         body: config,
       });
       addon.config = config;
