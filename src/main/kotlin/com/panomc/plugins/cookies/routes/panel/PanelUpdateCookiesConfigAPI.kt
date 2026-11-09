@@ -9,6 +9,8 @@ import com.panomc.plugins.cookies.CookiesPlugin
 import com.panomc.plugins.cookies.config.CookiesConfig
 import com.panomc.plugins.cookies.log.UpdatedCookiesConfigLog
 import com.panomc.plugins.cookies.permission.ManageCookiesPermission
+import com.panomc.plugins.cookies.util.CookiesContentSafety
+import com.panomc.platform.error.BadRequest
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.validation.ValidationHandler
@@ -60,6 +62,15 @@ class PanelUpdateCookiesConfigAPI(
         authProvider.requirePermission(ManageCookiesPermission(), context)
 
         val body = context.body().asJsonObject()
+
+        if (!CookiesContentSafety.isValidUpdate(body)) {
+            throw BadRequest()
+        }
+
+        if (body.containsKey("customContent")) {
+            body.put("customContent", CookiesContentSafety.sanitizeHtml(body.getString("customContent")) ?: "")
+        }
+
         configManager.saveConfig(body)
 
         val userId = authProvider.getUserIdFromRoutingContext(context)

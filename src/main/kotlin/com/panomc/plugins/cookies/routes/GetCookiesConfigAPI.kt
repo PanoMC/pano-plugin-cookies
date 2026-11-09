@@ -5,6 +5,7 @@ import com.panomc.platform.api.config.PluginConfigManager
 import com.panomc.platform.model.*
 import com.panomc.plugins.cookies.CookiesPlugin
 import com.panomc.plugins.cookies.config.CookiesConfig
+import com.panomc.plugins.cookies.util.CookiesContentSafety
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.RoutingContext
 import io.vertx.ext.web.validation.ValidationHandler
@@ -47,6 +48,6 @@ class GetCookiesConfigAPI(
 
 
     override suspend fun handle(context: RoutingContext): Result {
-        return Successful(JsonObject.mapFrom(configManager.config).map)
+        return Successful(CookiesContentSafety.toPublic(JsonObject.mapFrom(configManager.config)).map)
     }
 }
