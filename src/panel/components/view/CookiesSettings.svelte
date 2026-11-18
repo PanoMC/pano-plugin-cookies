@@ -120,12 +120,7 @@
               {/if}
             </div>
           {:else}
-            <textarea
-              class="form-control font-monospace"
-              id="customContent"
-              rows="10"
-              spellcheck="false"
-              bind:value={config.customContent}></textarea>
+            <HtmlCodeField id="customContent" bind:value={config.customContent} />
           {/if}
         </div>
       {:else}
@@ -260,6 +255,7 @@
 
 <script>
   import { _, showSuccessToast, showErrorToast } from '../../../main';
+  import HtmlCodeField from '../HtmlCodeField.svelte';
   import { api } from '@panomc/sdk/plugin-api';
 
   export let addon;
