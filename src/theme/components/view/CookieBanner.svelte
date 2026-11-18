@@ -1,6 +1,7 @@
 {#if show && config?.enabled}
   {#if config.design === 'BAR'}
     <div
+      use:customActions
       class="cookies-cookie-banner {BAR_POSITION_CLASSES[config.position] ?? ''} start-0 end-0 border-top border-bottom shadow-sm p-3"
       style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
         '#212529'}; border-color: {config.primaryColor} !important; z-index: {BANNER_Z};">
@@ -39,6 +40,7 @@
     </div>
   {:else if config.design === 'FLOATING'}
     <div
+      use:customActions
       class="cookies-cookie-banner p-4"
       style="position: fixed; {floatingOffset(config.position)} z-index: {BANNER_Z}; max-width: 400px;">
       <div
@@ -75,6 +77,7 @@
     </div>
   {:else if config.design === 'MODAL'}
     <div
+      use:customActions
       class="cookies-cookie-banner vw-100 vh-100 position-fixed top-0 start-0 d-flex align-items-center justify-content-center p-3"
       style="background: rgba(0,0,0,0.5); z-index: 9999;">
       <div style="width: 100%; max-width: 450px;">
@@ -114,6 +117,7 @@
     </div>
   {:else}
     <div
+      use:customActions
       class="cookies-cookie-banner position-fixed p-3 shadow"
       style="background: {config.backgroundColor}; color: {config.textColor}; z-index: {BANNER_Z}; bottom: 1rem; right: 1rem;">
       {@html config.customContent}
@@ -165,6 +169,35 @@
       default:
         return 'bottom: 0; left: 50%; transform: translateX(-50%);';
     }
+  }
+
+  function close() {
+    show = false;
+  }
+
+  // Custom HTML cannot carry scripts, so its buttons are wired by attribute:
+  // [data-cookies-accept] accepts and closes, [data-cookies-close] closes for this page view only.
+  function customActions(node) {
+    function onClick(event) {
+      const target = event.target instanceof Element ? event.target : null;
+      const acceptEl = target?.closest('[data-cookies-accept]');
+      const closeEl = target?.closest('[data-cookies-close]');
+
+      if (acceptEl && node.contains(acceptEl)) {
+        event.preventDefault();
+        accept();
+      } else if (closeEl && node.contains(closeEl)) {
+        event.preventDefault();
+        close();
+      }
+    }
+
+    node.addEventListener('click', onClick);
+    return {
+      destroy() {
+        node.removeEventListener('click', onClick);
+      }
+    };
   }
 
   function clickHandler(node) {

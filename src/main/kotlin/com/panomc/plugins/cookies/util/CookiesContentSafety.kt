@@ -18,9 +18,11 @@ object CookiesContentSafety {
     )
 
     private val safelist: Safelist = Safelist.relaxed()
-        .addTags("hr", "center", "font", "mark", "s", "del", "ins")
-        .addAttributes(":all", "style", "class", "title", "align", "dir")
+        .addTags("hr", "center", "font", "mark", "s", "del", "ins", "button")
+        // data-cookies-accept / data-cookies-close make custom buttons accept or close the notice (see CookieBanner.svelte).
+        .addAttributes(":all", "style", "class", "title", "align", "dir", "data-cookies-accept", "data-cookies-close")
         .addAttributes("a", "target", "rel")
+        .addAttributes("button", "type", "aria-label")
         .addAttributes("font", "color", "size", "face")
         .preserveRelativeLinks(true)
 
