@@ -50,21 +50,39 @@
               {$_('settings.custom-content')}
               <small class=" d-block">{$_('settings.custom-content-desc')}</small>
             </label>
-            <button
-              type="button"
-              class="btn btn-sm btn-outline-secondary"
-              on:click={loadDefaultTemplate}>
-              {$_('settings.load-default-template')}
-            </button>
+            <div class="d-flex flex-wrap gap-2">
+              <button
+                type="button"
+                class="btn btn-link btn-sm text-decoration-none"
+                on:click={() => (isPreview = !isPreview)}>
+                <i class="fas {isPreview ? 'fa-code' : 'fa-eye'} me-1"></i>
+                {isPreview ? $_('settings.custom-content-edit') : $_('settings.custom-content-preview')}
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                on:click={loadDefaultTemplate}>
+                {$_('settings.load-default-template')}
+              </button>
+            </div>
           </div>
-          <!-- A plain code field: a rich-text editor would rewrite the HTML into its own schema and drop
-               div, button, class and data-* on load. -->
-          <textarea
-            class="form-control font-monospace"
-            id="customContent"
-            rows="10"
-            spellcheck="false"
-            bind:value={config.customContent}></textarea>
+          <!-- A code field and a preview, not the rich-text editor: that one rewrites the HTML into its own
+               schema and drops div, button, class and data-* as soon as the page opens. -->
+          {#if isPreview}
+            <div
+              class="form-control overflow-auto p-3"
+              style="min-height: 200px; background: {config.backgroundColor ||
+                '#fff'}; color: {config.textColor || '#212529'};">
+              {@html config.customContent}
+            </div>
+          {:else}
+            <textarea
+              class="form-control font-monospace"
+              id="customContent"
+              rows="10"
+              spellcheck="false"
+              bind:value={config.customContent}></textarea>
+          {/if}
         </div>
       {:else}
         <!-- Message -->
@@ -229,6 +247,7 @@
     backgroundColor: '#343a40',
   };
   let saving = false;
+  let isPreview = false;
 
   let initialConfig = JSON.parse(JSON.stringify(config));
 
