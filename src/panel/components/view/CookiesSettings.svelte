@@ -25,6 +25,21 @@
         </div>
       </div>
 
+      <!-- Design -->
+      <div class="row mb-3">
+        <label class="col-md-6 col-form-label" for="design">
+          {$_('settings.design')}
+        </label>
+        <div class="col-md-6">
+          <select class="form-select" id="design" bind:value={config.design}
+            disabled={config.useCustomContent}>
+            <option value="BAR">{$_('settings.design-bar')}</option>
+            <option value="FLOATING">{$_('settings.design-floating')}</option>
+            <option value="MODAL">{$_('settings.design-modal')}</option>
+          </select>
+        </div>
+      </div>
+
       <!-- Custom Content Toggle -->
       <div class="row mb-3">
         <label class="col-md-6 col-form-label" for="useCustomContent">
@@ -134,20 +149,6 @@
           </div>
         </div>
       {/if}
-
-      <!-- Design -->
-      <div class="row mb-3">
-        <label class="col-md-6 col-form-label" for="design">
-          {$_('settings.design')}
-        </label>
-        <div class="col-md-6">
-          <select class="form-select" id="design" bind:value={config.design}>
-            <option value="BAR">{$_('settings.design-bar')}</option>
-            <option value="FLOATING">{$_('settings.design-floating')}</option>
-            <option value="MODAL">{$_('settings.design-modal')}</option>
-          </select>
-        </div>
-      </div>
 
       <!-- Position -->
       <div class="row mb-3">
@@ -299,6 +300,20 @@ ${button('btn btn-primary w-100 py-2')}`;
 
   function loadDefaultTemplate() {
     config.customContent = buildDefaultTemplate(config);
+  }
+
+  // While the custom HTML is still the untouched default template, it follows the design, texts and colour it was
+  // built from; once it is edited by hand it is left alone.
+  let lastTemplate = null;
+
+  $: syncTemplate(buildDefaultTemplate(config));
+
+  function syncTemplate(template) {
+    if (lastTemplate !== null && config.customContent === lastTemplate && template !== lastTemplate) {
+      config.customContent = template;
+    }
+
+    lastTemplate = template;
   }
 
   function onCustomContentToggle() {
