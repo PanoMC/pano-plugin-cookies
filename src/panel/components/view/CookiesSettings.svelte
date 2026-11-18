@@ -37,22 +37,34 @@
               class="form-check-input"
               type="checkbox"
               id="useCustomContent"
-              bind:checked={config.useCustomContent} />
+              bind:checked={config.useCustomContent}
+              on:change={onCustomContentToggle} />
           </div>
         </div>
       </div>
 
       {#if config.useCustomContent}
         <div class="mb-3">
-          <label class="form-label" for="customContent">
-            {$_('settings.custom-content')}
-            <small class=" d-block">{$_('settings.custom-content-desc')}</small>
-          </label>
-          <Editor
-            bind:content={config.customContent}
-            showHtml={true}
-            showPreview={true}
-            contentStyles={'min-height: 200px;'} />
+          <div class="d-flex flex-wrap align-items-start justify-content-between gap-2 mb-2">
+            <label class="form-label mb-0" for="customContent">
+              {$_('settings.custom-content')}
+              <small class=" d-block">{$_('settings.custom-content-desc')}</small>
+            </label>
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-secondary"
+              on:click={loadDefaultTemplate}>
+              {$_('settings.load-default-template')}
+            </button>
+          </div>
+          <!-- A plain code field: a rich-text editor would rewrite the HTML into its own schema and drop
+               div, button, class and data-* on load. -->
+          <textarea
+            class="form-control font-monospace"
+            id="customContent"
+            rows="10"
+            spellcheck="false"
+            bind:value={config.customContent}></textarea>
         </div>
       {:else}
         <!-- Message -->
@@ -199,9 +211,7 @@
 {/if}
 
 <script>
-  import { onMount } from 'svelte';
   import { _, showSuccessToast, showErrorToast } from '../../../main';
-  import { Editor } from '@panomc/sdk/components/panel';
   import { api } from '@panomc/sdk/plugin-api';
 
   export let addon;
@@ -226,6 +236,56 @@
 
   $: if (config.design === 'BAR' && !['TOP', 'BOTTOM'].includes(config.position)) {
     config.position = 'BOTTOM';
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;');
+  }
+
+  /**
+   * The built-in notice of the chosen design as plain HTML, filled with the current texts and colours, so a custom
+   * notice can start from it. Buttons work through data-cookies-accept / data-cookies-close (see CookieBanner.svelte).
+   */
+  function buildDefaultTemplate(c) {
+    const color = escapeHtml(c.primaryColor || '#007bff');
+    const message = escapeHtml(c.message || 'This website uses cookies to give you the best experience.');
+    const buttonText = escapeHtml(c.buttonText || 'Accept');
+    const link =
+      c.linkText && c.linkUrl
+        ? `<a href="${escapeHtml(c.linkUrl)}" target="_blank" style="color: ${color}; text-decoration: underline;" class="ms-1">${escapeHtml(c.linkText)}</a>`
+        : '';
+    const button = (classes) =>
+      `<button type="button" class="${classes}" style="background-color: ${color}; border-color: ${color};" data-cookies-accept>${buttonText}</button>`;
+
+    if (c.design === 'BAR') {
+      return `<div class="container text-center text-md-start">
+  <div class="row align-items-center">
+    <div class="col-md-9 mb-3 mb-md-0">
+      <p class="mb-0">${message} ${link}</p>
+    </div>
+    <div class="col-md-3 text-md-end">
+      ${button('btn btn-primary px-4')}
+    </div>
+  </div>
+</div>`;
+    }
+
+    return `<p class="mb-4">${message} ${link}</p>
+${button('btn btn-primary w-100 py-2')}`;
+  }
+
+  function loadDefaultTemplate() {
+    config.customContent = buildDefaultTemplate(config);
+  }
+
+  function onCustomContentToggle() {
+    if (config.useCustomContent && !config.customContent?.trim()) {
+      loadDefaultTemplate();
+    }
   }
 
   async function saveConfig() {

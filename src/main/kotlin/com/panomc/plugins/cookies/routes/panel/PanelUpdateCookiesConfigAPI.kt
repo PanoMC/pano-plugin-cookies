@@ -67,10 +67,6 @@ class PanelUpdateCookiesConfigAPI(
             throw BadRequest()
         }
 
-        if (body.containsKey("customContent")) {
-            body.put("customContent", CookiesContentSafety.sanitizeHtml(body.getString("customContent")) ?: "")
-        }
-
         configManager.saveConfig(body)
 
         val userId = authProvider.getUserIdFromRoutingContext(context)

@@ -31,7 +31,8 @@
     "use-custom-content": "Use Custom Content",
     "use-custom-content-desc": "Enable this to provide your own HTML for the cookie banner.",
     "custom-content": "Custom HTML Content",
-    "custom-content-desc": "Provide the HTML structure for your cookie banner. Add data-cookies-accept to a button or link to accept and close, data-cookies-close to only close it."
+    "custom-content-desc": "Provide the HTML structure for your cookie banner. Add data-cookies-accept to a button or link to accept and close, data-cookies-close to only close it.",
+    "load-default-template": "Load default template"
   },
   "permissions": {
     "MANAGE_COOKIES": {

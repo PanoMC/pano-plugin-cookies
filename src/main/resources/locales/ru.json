@@ -31,7 +31,8 @@
         "use-custom-content": "Использовать пользовательский контент",
         "use-custom-content-desc": "Включите это, чтобы предоставить свой собственный HTML для баннера куки.",
         "custom-content": "Пользовательский HTML контент",
-        "custom-content-desc": "Предоставьте структуру HTML для вашего баннера куки. Добавьте кнопке или ссылке data-cookies-accept, чтобы принять и закрыть, или data-cookies-close, чтобы только закрыть."
+        "custom-content-desc": "Предоставьте структуру HTML для вашего баннера куки. Добавьте кнопке или ссылке data-cookies-accept, чтобы принять и закрыть, или data-cookies-close, чтобы только закрыть.",
+        "load-default-template": "Загрузить шаблон по умолчанию"
     },
     "permissions": {
         "MANAGE_COOKIES": {

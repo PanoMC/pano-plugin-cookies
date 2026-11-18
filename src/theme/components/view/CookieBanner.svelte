@@ -175,7 +175,7 @@
     show = false;
   }
 
-  // Custom HTML cannot carry scripts, so its buttons are wired by attribute:
+  // Script tags in custom HTML do not run (it is inserted as HTML), so its buttons are wired by attribute:
   // [data-cookies-accept] accepts and closes, [data-cookies-close] closes for this page view only.
   function customActions(node) {
     function onClick(event) {

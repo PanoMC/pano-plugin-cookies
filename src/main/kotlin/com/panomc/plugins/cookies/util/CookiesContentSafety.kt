@@ -1,14 +1,11 @@
 package com.panomc.plugins.cookies.util
 
 import io.vertx.core.json.JsonObject
-import org.jsoup.Jsoup
-import org.jsoup.nodes.Document
-import org.jsoup.safety.Safelist
 import java.net.URI
 
 /**
- * The cookie notice is shown on every page of the site, so its custom HTML is cleaned of scripts and event handlers,
- * the link only takes http(s) URLs or paths on this site, and the colours only take plain colour values.
+ * The link only takes http(s) URLs or paths on this site, and the colours only take plain colour values (they are
+ * written into style attributes). The custom HTML is the admin's own content and is shown as written.
  */
 object CookiesContentSafety {
     private val COLOR_FIELDS = listOf("primaryColor", "textColor", "backgroundColor")
@@ -16,25 +13,6 @@ object CookiesContentSafety {
     private val COLOR_PATTERN = Regex(
         "^(#[0-9a-fA-F]{3,8}|(rgb|rgba|hsl|hsla)\\([0-9.,%\\s]+\\)|[a-zA-Z]{1,32})$"
     )
-
-    private val safelist: Safelist = Safelist.relaxed()
-        .addTags("hr", "center", "font", "mark", "s", "del", "ins", "button")
-        // data-cookies-accept / data-cookies-close make custom buttons accept or close the notice (see CookieBanner.svelte).
-        .addAttributes(":all", "style", "class", "title", "align", "dir", "data-cookies-accept", "data-cookies-close")
-        .addAttributes("a", "target", "rel")
-        .addAttributes("button", "type", "aria-label")
-        .addAttributes("font", "color", "size", "face")
-        .preserveRelativeLinks(true)
-
-    private val outputSettings = Document.OutputSettings().prettyPrint(false)
-
-    fun sanitizeHtml(html: String?): String? {
-        if (html == null) {
-            return null
-        }
-
-        return Jsoup.clean(html, "http://localhost/", safelist, outputSettings)
-    }
 
     fun isSafeLinkUrl(url: String?): Boolean {
         if (url.isNullOrEmpty()) {
@@ -73,8 +51,6 @@ object CookiesContentSafety {
 
     /** Cleans a config before it is sent to visitors, also covering values saved before these checks existed. */
     fun toPublic(config: JsonObject): JsonObject {
-        config.put("customContent", sanitizeHtml(config.getString("customContent")) ?: "")
-
         if (!isSafeLinkUrl(config.getString("linkUrl"))) {
             config.put("linkUrl", "")
         }

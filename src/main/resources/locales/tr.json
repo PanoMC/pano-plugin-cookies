@@ -31,7 +31,8 @@
     "use-custom-content": "Özel İçerik Kullan",
     "use-custom-content-desc": "Çerez başlığı için kendi HTML'inizi oluşturmak için bu seçeneği etkinleştirin.",
     "custom-content": "Özel HTML İçeriği",
-    "custom-content-desc": "Çerez başlığınız için HTML yapısını sağlayın. Kabul edip kapatmak için bir buton veya bağlantıya data-cookies-accept, sadece kapatmak için data-cookies-close ekleyin."
+    "custom-content-desc": "Çerez başlığınız için HTML yapısını sağlayın. Kabul edip kapatmak için bir buton veya bağlantıya data-cookies-accept, sadece kapatmak için data-cookies-close ekleyin.",
+    "load-default-template": "Varsayılan şablonu yükle"
   },
   "permissions": {
     "MANAGE_COOKIES": {
