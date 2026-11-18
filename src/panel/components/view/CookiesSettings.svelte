@@ -84,11 +84,40 @@
           <!-- A code field and a preview, not the rich-text editor: that one rewrites the HTML into its own
                schema and drops div, button, class and data-* as soon as the page opens. -->
           {#if isPreview}
-            <div
-              class="form-control overflow-auto p-3"
-              style="min-height: 200px; background: {config.backgroundColor ||
-                '#fff'}; color: {config.textColor || '#212529'};">
-              {@html config.customContent}
+            <!-- The same boxes CookieBanner.svelte draws around the custom HTML, without the fixed position. -->
+            <div class="form-control overflow-auto p-3 bg-body-tertiary" style="min-height: 200px;">
+              {#if config.design === 'BAR'}
+                <div
+                  class="border-top border-bottom shadow-sm p-3"
+                  style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
+                    '#212529'}; border-color: {config.primaryColor} !important;">
+                  {@html config.customContent}
+                </div>
+              {:else if config.design === 'MODAL'}
+                <div class="d-flex justify-content-center p-3" style="background: rgba(0,0,0,0.5);">
+                  <div style="width: 100%; max-width: 450px;">
+                    <div
+                      class="card shadow-lg border-0"
+                      style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
+                        '#212529'};">
+                      <div class="card-body p-4 text-center">
+                        {@html config.customContent}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {:else}
+                <div class="p-4" style="max-width: 400px;">
+                  <div
+                    class="card shadow-lg border-0"
+                    style="background: {config.backgroundColor || '#fff'}; color: {config.textColor ||
+                      '#212529'};">
+                    <div class="card-body p-4">
+                      {@html config.customContent}
+                    </div>
+                  </div>
+                </div>
+              {/if}
             </div>
           {:else}
             <textarea
