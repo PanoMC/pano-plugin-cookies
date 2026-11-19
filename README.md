@@ -13,7 +13,8 @@
 
 Cookies shows visitors a clear notice that your website uses cookies, with a link to your policy and an accept button. Pick a style, write your own message and match the colors to your website. It takes a minute to set up and needs no coding.
 
-## ✨ Features
+<h3 align="center">Features</h3>
+
 - 🍪 **Three styles**: Show a slim bar, a floating card or a centered popup.
 - 📍 **Flexible position**: Place it at the top, bottom or in any corner of the screen.
 - ✏️ **Your own words**: Change the message, button text and policy link.
@@ -22,17 +23,21 @@ Cookies shows visitors a clear notice that your website uses cookies, with a lin
 - ✅ **Shown once**: After a visitor accepts, the notice stays hidden for them.
 - 🔌 **On or off anytime**: Turn the notice on or off with one switch.
 
-## 📸 Screenshots
+<h3 align="center">Screenshots</h3>
+
 <p align="center"><img src=".github/assets/panel.png" alt="Set the style, text, position and colors from the panel." width="900" /></p>
 <p align="center"><i>Set the style, text, position and colors from the panel.</i></p>
 
-## 🚀 Get started
+<h3 align="center">Get started</h3>
+
 1. Open your Pano panel and go to **Addons**.
 2. Find **Cookies** and click **Install**.
 3. Open the addon's **Settings** tab, choose a style and colors, then click **Save**.
 
-## 💬 Support
+<h3 align="center">Support</h3>
+
 Questions or ideas? Join our [Discord](https://panomc.com/discord) or visit [panomc.com](https://panomc.com).
 
-## 📄 License
+<h3 align="center">License</h3>
+
 Released under the MIT License.
