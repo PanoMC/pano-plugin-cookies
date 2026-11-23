@@ -8,8 +8,11 @@ class CookiesPlugin : PanoPlugin() {
     override suspend fun onStart() {
         logger.info("Starting Cookies Plugin...")
 
-        val configManager = PluginConfigManager(this, CookiesConfig::class.java)
-        pluginBeanContext.beanFactory.registerSingleton(PluginConfigManager::class.java.name, configManager)
+        // A stop / start in the same context keeps the registered manager: registering it again would fail.
+        val beanFactory = pluginBeanContext.beanFactory
+        if (!beanFactory.containsSingleton(PluginConfigManager::class.java.name)) {
+            beanFactory.registerSingleton(PluginConfigManager::class.java.name, PluginConfigManager(this, CookiesConfig::class.java))
+        }
     }
 
     override suspend fun onEnable() {
