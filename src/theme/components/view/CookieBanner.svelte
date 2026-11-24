@@ -12,25 +12,25 @@
           <div class="row align-items-center">
             <div class="col-md-9 mb-3 mb-md-0">
               <p class="mb-0">
-                {config.message}
-                {#if config.linkText && config.linkUrl}
+                {message}
+                {#if config.linkUrl}
                   <a
                     href={config.linkUrl}
                     target="_blank"
                     style="color: {config.primaryColor}; text-decoration: underline;"
                     class="ms-1">
-                    {config.linkText}
+                    {linkText}
                   </a>
                 {/if}
               </p>
             </div>
             <div class="col-md-3 text-md-end">
-              {#if config.buttonText}
+              {#if buttonText}
                 <button
                   class="cookies-cookie-banner__action btn btn-primary px-4"
                   style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
                   use:clickHandler>
-                  {config.buttonText}
+                  {buttonText}
                 </button>
               {/if}
             </div>
@@ -52,23 +52,23 @@
             {@html config.customContent}
           {:else}
             <p class="card-text mb-4">
-              {config.message}
-              {#if config.linkText && config.linkUrl}
+              {message}
+              {#if config.linkUrl}
                 <a
                   href={config.linkUrl}
                   target="_blank"
                   style="color: {config.primaryColor}; text-decoration: underline;"
                   class="d-block mt-2">
-                  {config.linkText}
+                  {linkText}
                 </a>
               {/if}
             </p>
-            {#if config.buttonText}
+            {#if buttonText}
               <button
                 class="cookies-cookie-banner__action-2 btn btn-primary w-100 py-2"
                 style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
                 use:clickHandler>
-                {config.buttonText}
+                {buttonText}
               </button>
             {/if}
           {/if}
@@ -89,25 +89,25 @@
             {#if config.useCustomContent}
               {@html config.customContent}
             {:else}
-              <h5 class="cookies-cookie-banner__title card-title mb-3">Çerez Politikası</h5>
+              <h5 class="cookies-cookie-banner__title card-title mb-3">{$_('plugins.pano-plugin-cookies.banner.title')}</h5>
               <p class="card-text mb-4">
-                {config.message}
-                {#if config.linkText && config.linkUrl}
+                {message}
+                {#if config.linkUrl}
                   <a
                     href={config.linkUrl}
                     target="_blank"
                     style="color: {config.primaryColor}; text-decoration: underline;"
                     class="d-block mt-2">
-                    {config.linkText}
+                    {linkText}
                   </a>
                 {/if}
               </p>
-              {#if config.buttonText}
+              {#if buttonText}
                 <button
                   class="cookies-cookie-banner__action-3 btn btn-primary w-100 py-2"
                   style="background-color: {config.primaryColor}; border-color: {config.primaryColor}"
                   use:clickHandler>
-                  {config.buttonText}
+                  {buttonText}
                 </button>
               {/if}
             {/if}
@@ -131,6 +131,7 @@
 
 <script>
   import {page} from '@panomc/sdk/svelte';
+  import { _ } from 'svelte-i18n';
 
   const browser = typeof window !== 'undefined';
   const accepted = browser ? localStorage.getItem('pano-cookies-accepted') : true;
@@ -145,6 +146,11 @@
   let { config: configProp = null } = $props();
   let config = $derived(configProp ?? $page.data.cookiesConfig);
   let show = $state(!accepted);
+
+  // Empty texts use the defaults in the visitor's language.
+  let message = $derived(config?.message || $_('plugins.pano-plugin-cookies.banner.default-message'));
+  let buttonText = $derived(config?.buttonText || $_('plugins.pano-plugin-cookies.banner.default-button'));
+  let linkText = $derived(config?.linkText || $_('plugins.pano-plugin-cookies.banner.default-link'));
 
   function accept() {
     if (browser) {

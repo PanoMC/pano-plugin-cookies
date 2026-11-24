@@ -131,7 +131,7 @@
             <small class=" d-block">{$_('settings.message-desc')}</small>
           </label>
           <div class="col-md-6">
-            <textarea class="form-control" id="message" rows="2" bind:value={config.message}
+            <textarea class="form-control" id="message" rows="2" placeholder={$_('banner.default-message')} bind:value={config.message}
             ></textarea>
           </div>
         </div>
@@ -147,6 +147,7 @@
               class="form-control"
               id="buttonText"
               type="text"
+              placeholder={$_('banner.default-button')}
               bind:value={config.buttonText} />
           </div>
         </div>
@@ -158,7 +159,7 @@
             <small class=" d-block">{$_('settings.link-text-desc')}</small>
           </label>
           <div class="col-md-6">
-            <input class="form-control" id="linkText" type="text" bind:value={config.linkText} />
+            <input class="form-control" id="linkText" type="text" placeholder={$_('banner.default-link')} bind:value={config.linkText} />
           </div>
         </div>
 
@@ -295,13 +296,13 @@
    * The built-in notice of the chosen design as plain HTML, filled with the current texts and colours, so a custom
    * notice can start from it. Buttons work through data-cookies-accept / data-cookies-close (see CookieBanner.svelte).
    */
-  function buildDefaultTemplate(c) {
+  function buildDefaultTemplate(c, t) {
     const color = escapeHtml(c.primaryColor || '#007bff');
-    const message = escapeHtml(c.message || 'This website uses cookies to give you the best experience.');
-    const buttonText = escapeHtml(c.buttonText || 'Accept');
+    const message = escapeHtml(c.message || t('banner.default-message'));
+    const buttonText = escapeHtml(c.buttonText || t('banner.default-button'));
     const link =
-      c.linkText && c.linkUrl
-        ? `<a href="${escapeHtml(c.linkUrl)}" target="_blank" style="color: ${color}; text-decoration: underline;" class="ms-1">${escapeHtml(c.linkText)}</a>`
+      c.linkUrl
+        ? `<a href="${escapeHtml(c.linkUrl)}" target="_blank" style="color: ${color}; text-decoration: underline;" class="ms-1">${escapeHtml(c.linkText || t('banner.default-link'))}</a>`
         : '';
     const button = (classes) =>
       `<button type="button" class="${classes}" style="background-color: ${color}; border-color: ${color};" data-cookies-accept>${buttonText}</button>`;
@@ -324,14 +325,14 @@ ${button('btn btn-primary w-100 py-2')}`;
   }
 
   function loadDefaultTemplate() {
-    config.customContent = buildDefaultTemplate(config);
+    config.customContent = buildDefaultTemplate(config, $_);
   }
 
   // While the custom HTML is still the untouched default template, it follows the design, texts and colour it was
   // built from; once it is edited by hand it is left alone.
   let lastTemplate = null;
 
-  $: syncTemplate(buildDefaultTemplate(config));
+  $: syncTemplate(buildDefaultTemplate(config, $_));
 
   function syncTemplate(template) {
     if (lastTemplate !== null && config.customContent === lastTemplate && template !== lastTemplate) {

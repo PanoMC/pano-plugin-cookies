@@ -2,9 +2,9 @@
   "settings": {
     "title": "Çerez Ayarları",
     "enabled": "Çerez Onayını Etkinleştir",
-    "enabled-desc": "Ziyaretçilere çerez onay başlığını göster.",
+    "enabled-desc": "Ziyaretçilere çerez onay bildirimini gösterir.",
     "message": "Mesaj",
-    "message-desc": "Başlıkta gösterilecek metin.",
+    "message-desc": "Bildirimde gösterilecek metin.",
     "button-text": "Buton Metni",
     "button-text-desc": "'Kabul Et' butonu için metin.",
     "link-text": "Bağlantı Metni",
@@ -29,9 +29,9 @@
       "background": "Arka Plan Rengi"
     },
     "use-custom-content": "Özel İçerik Kullan",
-    "use-custom-content-desc": "Çerez başlığı için kendi HTML'inizi oluşturmak için bu seçeneği etkinleştirin.",
+    "use-custom-content-desc": "Çerez bildirimi için kendi HTML kodunuzu kullanmak istiyorsanız bunu etkinleştirin.",
     "custom-content": "Özel HTML İçeriği",
-    "custom-content-desc": "Çerez başlığınız için HTML yapısını sağlayın. Kabul edip kapatmak için bir buton veya bağlantıya data-cookies-accept, sadece kapatmak için data-cookies-close ekleyin.",
+    "custom-content-desc": "Çerez bildiriminizin HTML yapısını girin. Kabul edip kapatmak için bir buton veya bağlantıya data-cookies-accept, sadece kapatmak için data-cookies-close ekleyin.",
     "load-default-template": "Varsayılan şablonu yükle",
     "custom-content-preview": "Önizleme",
     "custom-content-edit": "HTML'i düzenle"
@@ -51,5 +51,11 @@
   "toasts": {
     "save-success": "Ayarlar başarıyla kaydedildi.",
     "save-error": "Ayarlar kaydedilirken bir hata oluştu."
+  },
+  "banner": {
+    "title": "Çerez politikası",
+    "default-message": "Web sitemizde size en iyi deneyimi sunmak için çerezler kullanıyoruz.",
+    "default-button": "Kabul et",
+    "default-link": "Daha fazla bilgi"
   }
 }

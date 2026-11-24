@@ -4,9 +4,10 @@ import com.panomc.platform.api.config.PluginConfig
 
 class CookiesConfig(
     val enabled: Boolean = true,
-    val message: String = "We use cookies to ensure you get the best experience on our website.",
-    val buttonText: String = "Got it!",
-    val linkText: String = "Learn more",
+    // Empty texts fall back to the visitor's language in the banner (banner.default-* locale keys).
+    val message: String = "",
+    val buttonText: String = "",
+    val linkText: String = "",
     val linkUrl: String = "https://www.cookiesandyou.com/",
     val design: CookiesDesign = CookiesDesign.BAR,
     val position: CookiesPosition = CookiesPosition.BOTTOM,

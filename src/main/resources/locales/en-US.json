@@ -1,6 +1,6 @@
 {
   "settings": {
-    "title": "Cookies Settings",
+    "title": "Cookie Settings",
     "enabled": "Enable Cookie Consent",
     "enabled-desc": "Show the cookie consent banner to visitors.",
     "message": "Message",
@@ -51,5 +51,11 @@
   "toasts": {
     "save-success": "Settings saved successfully.",
     "save-error": "Failed to save settings."
+  },
+  "banner": {
+    "title": "Cookie policy",
+    "default-message": "We use cookies to give you the best experience on our website.",
+    "default-button": "Accept",
+    "default-link": "Learn more"
   }
 }
